@@ -47,4 +47,49 @@
 # print(result)
 
 
-#프로그래머스_카펫
+# #프로그래머스_카펫
+# import math
+# def solution(brown, yellow):
+#     total = brown + yellow
+#     for h in range(3,int(math.sqrt(total)+1)): 
+#         if total % h:
+#             continue
+#         w = total // h
+#         if (w-2) * (h-2) == yellow:
+#             return[w,h]
+#     return 0
+# print(solution(10,2)) # [4,3]
+# print(solution(8,1)) # [3,3]
+# print(solution(24,24)) # [8,6]
+
+
+# #프로그래머스_행렬테두리회전하기
+# def solution(rows, columns, queries):
+#     # 초기 행렬: 1..rows*columns
+#     board = [[c + r*columns + 1 for c in range(columns)] for r in range(rows)]
+#     ans = []
+#     for x1, y1, x2, y2 in queries:
+#         x1 -= 1; y1 -= 1; x2 -= 1; y2 -= 1  # 0-index
+#         prev = board[x1+1][y1]   # 첫 교환에 들어갈 값(왼쪽 열 아랫칸)
+#         minv = prev
+#         # 위쪽 행: (x1, y1..y2)
+#         for y in range(y1, y2 + 1):
+#             board[x1][y], prev = prev, board[x1][y]
+#             minv = min(minv, board[x1][y])
+#         # 오른쪽 열: (x1+1..x2, y2)
+#         for x in range(x1 + 1, x2 + 1):
+#             board[x][y2], prev = prev, board[x][y2]
+#             minv = min(minv, board[x][y2])
+#         # 아래쪽 행: (x2, y2-1..y1)
+#         for y in range(y2 - 1, y1 - 1, -1):
+#             board[x2][y], prev = prev, board[x2][y]
+#             minv = min(minv, board[x2][y])
+#         # 왼쪽 열: (x2-1..x1+1, y1)
+#         for x in range(x2 - 1, x1, -1):
+#             board[x][y1], prev = prev, board[x][y1]
+#             minv = min(minv, board[x][y1])
+#         ans.append(minv)
+#     return ans
+# print(solution(6,6,[[2,2,5,4],[3,3,6,6],[5,1,6,3]])) # [8,10,25]
+# print(solution(3,3,[[1,1,2,2],[1,2,2,3],[2,1,3,2],[2,2,3,3]])) # [1,1,5,3]
+# print(solution(100,97,[[1,1,100,97]])) # [1]
